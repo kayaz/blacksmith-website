@@ -1,0 +1,33 @@
+<div id="pageheader"
+    <?php if($this->page->plik){?> style="background:#333 url('<?=$this->filesUrl(); ?>/header/<?=$this->page->plik;?>') center center no-repeat"<?php } ?>
+>
+    <div class="container h-100">
+        <div class="row h-100 d-flex align-items-center">
+            <div class="col-12 text-center">
+                <?php if($this->strona_h1){ ?>
+                    <h1><span><?=$this->strona_h1;?></span></h1>
+                <?php } else { ?>
+                    <h1><span><?=$this->strona_nazwa;?></span></h1>
+                <?php } ?>
+                <nav itemscope itemtype="https://schema.org/Breadcrumb" role="navigation">
+                    <ul class="breadcrumb justify-content-center" itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="<?=$this->baseUrl;?>/">
+                                <span itemprop="name">Strona główna</span>
+                            </a>
+                            <meta itemprop="position" content="1" /></li>
+                        <li class="sep"></li>
+                        <?php
+                        if($this->breadcrumbs) {
+                            echo $this->breadcrumbs;
+                        } else {
+                            $menu = Zend_Registry::get('mainmenu');
+                            echo $menu->breadcrumbs($this->strona_id);
+                        }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

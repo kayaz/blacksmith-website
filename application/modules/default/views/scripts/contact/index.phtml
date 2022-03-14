@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <?=(isset($this->page->tekst)) ? parse($this->page->tekst) : parse(json_decode($this->page->json)->tekst); ?>
+        </div>
+    </div>
+</div>
+
+<div class="kontakt-mapa mt-5 pt-3"><?=$this->header->kontakt_map;?></div>

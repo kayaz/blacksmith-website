@@ -1,0 +1,61 @@
+<div id="contact-form">
+    <form class="container validateForm" method="post" action="">
+        <div class="row">
+            <?php if($this->message == 1) :?>
+                <div id="formalert" class="col-12">
+                    <div class="sendok mb-4"><p>Twoja wiadomość została poprawnie wysłana</p></div>
+                </div>
+            <?php endif; ?>
+            <?php if($this->message == 2) :?>
+                <div id="formalert" class="col-12">
+                    <div class="senderror mb-4"><p>Formularz zawiera błędy, popraw je i spróbuj ponownie</p></div>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="row">
+            <div class="col-4 input">
+                <label for="form_imie">Imię</label>
+                <input type="text" name="imie" id="form_imie" class="validate[required]" data-prompt-position="topLeft:0" required>
+            </div>
+            <div class="col-4 input">
+                <label for="form_email">E-mail</label>
+                <input type="email" name="email" id="form_email" class="validate[required]" data-prompt-position="topLeft:0" required>
+            </div>
+            <div class="col-4 input">
+                <label for="form_telefon">Telefon</label>
+                <input type="tel" name="telefon" id="form_telefon" class="validate[required]" data-prompt-position="topLeft:0" required>
+            </div>
+            <div class="col-12 input">
+                <label for="form_wiadomosc">Treść wiadomości</label>
+                <textarea name="wiadomosc" cols="30" rows="10" id="form_wiadomosc" class="validate[required]" data-prompt-position="topLeft:0" required></textarea>
+            </div>
+
+            <div class="col-12 obowiazek text-justify">
+                <?=$this->rodo['obowiazek'];?>
+            </div>
+            <div class="col-12 regulki">
+                <?php foreach($this->rodo_rules as $r){?>
+                    <div class="regulka">
+                        <input
+                                name="zgoda_<?=$r['id'];?>"
+                                id="zgoda_<?=$r['id'];?>"
+                                value="1"
+                                type="checkbox"
+                                <?php if($r['wymagane'] == 1){;?>class="validate[required]" required<?php } ?>
+                                data-prompt-position="topLeft:0"
+                        >
+                        <label for="zgoda_<?=$r['id'];?>" class="rules-text text-justify"><?= ($this->lang == 'pl') ? $r['tresc'] : $r['tresc_en'];?></label>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center pt-4">
+                <script type="text/javascript">
+                    document.write("<button type=\"submit\" class=\"bttn bttn-shadow bttn-center\">Wyślij wiadomość</button>");
+                </script>
+                <noscript><p><b>Do poprawnego działania, Java musi być włączona.</b><p></noscript>
+            </div>
+        </div>
+    </form>
+</div>

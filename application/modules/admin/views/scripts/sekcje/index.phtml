@@ -1,0 +1,35 @@
+<div class="title"><h1><?=$this->controlname;?></h1></div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget">
+			<table width="100%" cellspacing="0" cellpadding="0" class="tableStatic adm" id="sortable">
+				<thead>
+					<tr>
+					<th width="90%">Nazwa sekcji</th>
+					<th width="10%"></th>
+					</tr>
+				</thead>
+				<tbody class="content">
+				<?php foreach($this->lista as $pozycja) : ?>
+				<tr id="recordsArray_<?=$this->escape($pozycja->id);?>">
+				<td><?php if($pozycja->nazwa) { echo $pozycja->nazwa; } else { echo $pozycja->tytul; } ?></td>
+				<td class="right">
+					<a href="<?=$this->baseUrl();?>/admin/sekcje/edytuj/id/<?=$this->escape($pozycja->id);?>/" class="actionBtn tip btnEdit" title="Edytuj wpis"></a> <?php if($pozycja->miejsce == 2) {?><a href="<?=$this->baseUrl();?>/admin/sekcje/usun/id/<?=$this->escape($pozycja->id);?>/" class="actionBtn tip btnDelete confirm" title="Usuń"></a><?php } ?>
+				</td>
+				</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+			<div class="table-footer">
+				<a href="<?=$this->baseUrl();?>/admin/sekcje/atut/" class="button greyishBtn">Dodaj atut inwestora</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$("#sortable tbody.content").sortuj('<?=$this->baseUrl();?>/admin/sekcje/ustaw/');
+});
+//]]>
+</script>

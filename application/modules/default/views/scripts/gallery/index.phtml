@@ -1,0 +1,26 @@
+<div class="container">
+    <?php foreach($this->katalog as $int => $k) { ?>
+        <div class="<?php echo fmod($int, 2) ? 'row mt-5' : 'row flex-row-reverse' ?>">
+            <div class="col-6 d-flex align-items-center">
+                <div class="gallery-name text-center">
+                    <h2><a href="<?=$this->url(array(
+                            'language' => $this->lang,
+                            'slug'=> $k->slug
+                        ), 'gallery-show');?>"><?=$k->nazwa;?></a></h2>
+                    <a href="<?=$this->url(array(
+                        'language' => $this->lang,
+                        'slug'=> $k->slug
+                    ), 'gallery-show');?>" class="bttn justify-content-center">ZOBACZ GALERIĘ</a>
+                </div>
+            </div>
+            <div class="col-6">
+                <a href="<?=$this->url(array(
+                    'language' => $this->lang,
+                    'slug'=> $k->slug
+                ), 'gallery-show');?>">
+                <img src="<?=$this->filesUrl(); ?>/galeria/catalog/<?=$k->plik;?>" alt="<?=$k->nazwa;?>">
+                </a>
+            </div>
+        </div>
+    <?php } ?>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row justify-content-center gallery-thumbs">
+        <?php foreach ($this->photos as $p) { ?>
+            <div class="col-3">
+                <div class="col-gallery-thumb">
+                    <a href="<?=$this->filesUrl(); ?>/galeria/big/<?=$p->plik;?>" class="swipebox" rel="gallery-1'.$input[2].'" title="">
+                        <img src="<?=$this->filesUrl(); ?>/galeria/thumbs/<?=$p->plik;?>">
+                        <div></div>
+                    </a>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>

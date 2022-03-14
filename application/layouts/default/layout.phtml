@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title><?= $this->main_meta_tytul; ?></title>
+    <meta name="description" content="<?= $this->main_meta_opis ?>">
+    <meta name="keywords" content="<?= $this->main_meta_slowa; ?>">
+<?php if($this->header->autor){?>
+	<meta name="author" content="<?= $this->header->autor; ?>">
+<?php } ?>
+<?php if($this->header->robots){?>
+	<meta name="robots" content="<?= $this->header->robots; ?>">
+<?php } ?>
+<?php if($this->header->share_plik) {?>
+	<meta property="og:title" content="<?=$this->header->share_tytul;?>">
+	<meta property="og:image" content="<?= $this->header->domena; ?>files/share/<?=$this->header->share_plik;?>">
+	<meta property="og:description" content="<?=$this->header->share_opis;?>">
+	<meta property="og:type" content="website">
+	<meta property="og:image:width" content="600">
+	<meta property="og:image:height" content="315">
+	<meta property="og:url" content="<?= $this->header->domena; ?>">
+<?php } ?>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+	<!-- Wylaczenie numeru tel. -->
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- Prefetch -->
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+	<link rel="stylesheet" href="<?=$this->cssUrl();?>/bootstrap.css">
+	<link rel="stylesheet" href="<?=$this->cssUrl();?>/styles.css">
+
+	<?= $this->header->head; ?>
+</head>
+<body id="mainpage" class="<?php if(Zend_Auth::getInstance()->hasIdentity()) { ?> is-admin<?php } ?>">
+
+    <?=$this->render('header.phtml');?>
+
+    <div id="slider">
+        <ul class="rslidess list-unstyled mb-0">
+            <?php foreach($this->slider as $panel){?>
+                <li>
+                    <img src="<?=$this->filesUrl();?>/slider/<?=$panel->plik;?>" alt="<?=$panel->tytul;?>">
+                    <div class="slider-opacity" style="background: rgb(0, 0, 0, <?=$panel->opacity;?>)"></div>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+
+    <div id="offer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="offer-box">
+                        <div class="offer-box-icon">
+                            <img src="<?=$this->gfxUrl();?>/template/gate-icon.png" alt="Bramy i płoty kute">
+                        </div>
+                        <h2>Bramy i płoty kute</h2>
+                        <hr>
+                        <p>Kowalstwo artystyczne to oryginalny sposób na kształtowanie otoczenia domu oraz wystroju wnętrza.</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="offer-box">
+                        <div class="offer-box-icon">
+                            <img src="<?=$this->gfxUrl();?>/template/balustrada-icon.png" alt="Balustrady kute">
+                        </div>
+                        <h2>Balustrady kute</h2>
+                        <hr>
+                        <p>Przy zamówieniu bramy, płotu czy balustrady wykonujemy kawałek wybranego wzoru do akceptacji albo do naniesienia zmian.</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="offer-box">
+                        <div class="offer-box-icon">
+                            <img src="<?=$this->gfxUrl();?>/template/meble-icon.png" alt="Meble">
+                        </div>
+                        <h2>Meble i inne</h2>
+                        <hr>
+                        <p>Wykonujemy różnego rodzaju meble zarówno ogrodowe jak i domowe. Są to krzesła, stoły, ławeczki, łóżka, półki.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="paralax">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-8">
+                    <p><b>Metal po nagrzaniu do odpowiedniej temperatury jest materiałem bardzo plastycznym.</b></p>
+                    <p>&nbsp;</p>
+                    <p>Dlatego można wykonać z niego różne przedmioty wystroju wnętrz jak lampy, żyrandole, świeczniki, przybory kominkowe i inne przedmioty, które podpowie nam wyobrażnia.</p>
+                    <a href="#" class="bttn justify-content-center">PEŁNA OFERTA</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 pr-5 d-flex align-items-center">
+                    <div>
+                        <p>Jestem trzecim pokoleniem w mojej rodzinie, która zajmuje się kowalstwem artystycznym. Wykonujemy kute bramy, balustrady, ogrodzenia oraz różne przedmioty wystroju wnętrz.</p>
+                        <p>&nbsp;</p>
+                        <p>Wykonujemy również renowacje zabytków przywracając im dawny blask. Nasze prace zdobią Bazylikę w Licheniu, Katedrę w Gnieżnie, zabytkowe Kapliczki w Pakości, muzea, kościoły oraz domy prywatne w kraju i zagranicą.</p>
+                        <a href="<?=$this->url(array('language'=> $this->lang), 'about');?>" class="bttn justify-content-center">WIĘCEJ O MNIE</a>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <img src="<?=$this->filesUrl();?>/upload/o-firmie.jpg" alt="Nasza realizacja">
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<?=$this->render('footer.phtml');?>
+
+	<!-- jQuery -->
+    <script src="<?=$this->jsUrl();?>/jquery.js" charset="utf-8"></script>
+	<script src="<?=$this->jsUrl();?>/bootstrap.bundle.min.js" charset="utf-8"></script>
+	<script src="<?=$this->jsUrl();?>/main.js" charset="utf-8"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+        $("#slider ul").responsiveSlides(
+            {
+                auto:<?=$this->header->slider_auto; ?>,
+                pager:<?=$this->header->slider_pager; ?>,
+                nav:<?=$this->header->slider_nav; ?>,
+                timeout:<?=$this->header->slider_timeout; ?>,
+                random:false,
+                speed: <?=$this->header->slider_speed; ?>
+            });
+
+<?php if($this->header->popup_status == 1){ ?>
+	<?php if($this->header->popup_tryb == 1){ ?>
+					$.cookie('popup', null);
+					$.magnificPopup.open({
+						items: {
+							src: '<div class="white-popup"><?= str_replace (array("\r\n", "\n", "\r"), ' ', $this->header->popup_tekst); ?></div>',
+							type: 'inline'
+						}
+					});
+						setTimeout( function(){ 
+							$.magnificPopup.close();
+						}, 5000 );
+	<?php } else {?>
+					if ($.cookie('popup') == null){
+						$.magnificPopup.open({
+							items: {
+								src: '<div class="white-popup"><?= str_replace (array("\r\n", "\n", "\r"), ' ', $this->header->popup_tekst); ?></div>',
+								type: 'inline'
+							}
+						});
+						setTimeout( function(){ 
+							$.magnificPopup.close();
+						}, 5000 );
+						$.cookie('popup','true');
+					}
+	<?php } ?>
+<?php } else {?>
+			$.cookie('popup', null);  
+<?php } ?>
+	});
+	</script>
+	<?= $this->header->footer; ?>
+</body>
+</html>

@@ -1,0 +1,17 @@
+RewriteRule sitemap.xml sitemap.xml [L]
+RewriteRule favicon.ico favicon.ico [L]
+RewriteEngine On
+
+RewriteRule .* public/index.php
+
+AddType font/ttf .ttf
+AddType font/eot .eot
+AddType font/otf .otf
+AddType font/woff .woff
+AddType font/woff .svg
+
+<FilesMatch "\.(ttf|otf|eot|woff|svg)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
