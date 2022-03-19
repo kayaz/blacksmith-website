@@ -17,8 +17,9 @@ $(document).ready(function(){
 						<th width="5%" style="text-align:center">ID</th>
 						<th width="5%">Pozycja</th>
 						<th width="5%">Status</th>
-						<th width="75%">Nazwa</th>
+						<th width="65%">Nazwa</th>
 						<th width="10%"></th>
+                        <?php if($this->canbetranslate){?><th width="10%"></th><?php } ?>
 						</tr>
 				</thead>
 				<tbody class="content">
@@ -33,6 +34,13 @@ $(document).ready(function(){
 					<a href="<?=$this->baseUrl();?>/admin/galeria/edytuj/id/<?= $this->escape($katalog->id);?>/" class="actionBtn tip btnEdit" title="Edytuj katalog" data-placement="top-right"></a>
 					<a href="<?=$this->baseUrl();?>/admin/galeria/usun-katalog/id/<?= $this->escape($katalog->id);?>/" class="actionBtn tip btnDelete confirm" title="Usuń katalog" data-placement="top-right"></a>
 					</td>
+                    <?php if($this->canbetranslate){?>
+                        <td class="right">
+                            <?php foreach($this->langs as $l) { ?>
+                                <a href="<?=$this->baseUrl();?>/admin/galeria/tlumaczenie/id/<?=$this->escape($katalog->id);?>/lang/<?=$this->escape($l->kod);?>/" class="actionBtn tip" title="Edytuj tłumaczenie: <?=$this->escape($l->nazwa);?>"><img src="<?=$this->baseUrl();?>/public/gfx/flags/<?=$this->escape($l->flaga);?>"></a>
+                            <?php } ?>
+                        </td>
+                    <?php } ?>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>

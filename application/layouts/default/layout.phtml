@@ -54,36 +54,18 @@
     <div id="offer">
         <div class="container">
             <div class="row">
+            <?php foreach($this->atuty as $a) {?>
                 <div class="col-4">
                     <div class="offer-box">
                         <div class="offer-box-icon">
-                            <img src="<?=$this->gfxUrl();?>/template/gate-icon.png" alt="Bramy i płoty kute">
+                            <img src="<?=$this->filesUrl();?>/images/<?=$a->plik;?>" alt="<?php echo (isset($a->nazwa)) ? $a->nazwa : json_decode($a->json)->nazwa;?>">
                         </div>
-                        <h2>Bramy i płoty kute</h2>
+                        <h2><?php echo (isset($a->nazwa)) ? $a->nazwa : json_decode($a->json)->nazwa;?></h2>
                         <hr>
-                        <p>Kowalstwo artystyczne to oryginalny sposób na kształtowanie otoczenia domu oraz wystroju wnętrza.</p>
+                        <p><?php echo (isset($a->tekst)) ? $a->tekst : json_decode($a->json)->tekst;?></p>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="offer-box">
-                        <div class="offer-box-icon">
-                            <img src="<?=$this->gfxUrl();?>/template/balustrada-icon.png" alt="Balustrady kute">
-                        </div>
-                        <h2>Balustrady kute</h2>
-                        <hr>
-                        <p>Przy zamówieniu bramy, płotu czy balustrady wykonujemy kawałek wybranego wzoru do akceptacji albo do naniesienia zmian.</p>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="offer-box">
-                        <div class="offer-box-icon">
-                            <img src="<?=$this->gfxUrl();?>/template/meble-icon.png" alt="Meble">
-                        </div>
-                        <h2>Meble i inne</h2>
-                        <hr>
-                        <p>Wykonujemy różnego rodzaju meble zarówno ogrodowe jak i domowe. Są to krzesła, stoły, ławeczki, łóżka, półki.</p>
-                    </div>
-                </div>
+            <?php } ?>
             </div>
         </div>
     </div>
@@ -92,10 +74,8 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-8">
-                    <p><b>Metal po nagrzaniu do odpowiedniej temperatury jest materiałem bardzo plastycznym.</b></p>
-                    <p>&nbsp;</p>
-                    <p>Dlatego można wykonać z niego różne przedmioty wystroju wnętrz jak lampy, żyrandole, świeczniki, przybory kominkowe i inne przedmioty, które podpowie nam wyobrażnia.</p>
-                    <a href="#" class="bttn justify-content-center">PEŁNA OFERTA</a>
+                    <?=$this->homepage_paralaxa;?>
+                    <a href="#" class="bttn justify-content-center"><?=$this->translate('tl_pelna_oferta');?></a>
                 </div>
             </div>
         </div>
@@ -106,10 +86,8 @@
             <div class="row">
                 <div class="col-6 pr-5 d-flex align-items-center">
                     <div>
-                        <p>Jestem trzecim pokoleniem w mojej rodzinie, która zajmuje się kowalstwem artystycznym. Wykonujemy kute bramy, balustrady, ogrodzenia oraz różne przedmioty wystroju wnętrz.</p>
-                        <p>&nbsp;</p>
-                        <p>Wykonujemy również renowacje zabytków przywracając im dawny blask. Nasze prace zdobią Bazylikę w Licheniu, Katedrę w Gnieżnie, zabytkowe Kapliczki w Pakości, muzea, kościoły oraz domy prywatne w kraju i zagranicą.</p>
-                        <a href="<?=$this->url(array('language'=> $this->lang), 'about');?>" class="bttn justify-content-center">WIĘCEJ O MNIE</a>
+                        <?=$this->homepage_about;?>
+                        <a href="<?=$this->url(array('language'=> $this->lang), 'about');?>" class="bttn justify-content-center"><?=$this->translate('tl_wiecej_omnie');?></a>
                     </div>
                 </div>
                 <div class="col-6">

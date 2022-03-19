@@ -2,8 +2,19 @@
 require_once 'kCMS/Thumbs/ThumbLib.inc.php';
 class Admin_GaleriaController extends kCMS_Admin
 {
+        private $redirect;
+        private $Translate;
+        private $Form;
+        private $Model;
+
 		public function preDispatch() {
 			$this->view->controlname = "Galeria";
+
+            $this->Model = new Model_GalleryModel();
+            $this->Form = new Form_NazwaForm();
+
+            $this->Translate = new Model_TranslateModel();
+            $this->redirect = 'admin/galeria';
 		}
 ################################################ ZDJĘCIA PRODUKTÓW ################################################
 
@@ -269,4 +280,46 @@ class Admin_GaleriaController extends kCMS_Admin
 			}
 			$this->redirect('/admin/galeria/pokaz/id/'.$pic->id_gal.'/');
 	}
+
+    // Edytuj języki
+    public function tlumaczenieAction() {
+        $this->_helper->viewRenderer('form', null, true);
+
+        // Odczytanie id
+        $id = (int)$this->getRequest()->getParam('id');
+        $lang = $this->getRequest()->getParam('lang');
+        if(!$id || !$lang){
+            $this->redirect($this->redirect);
+        }
+        $entry = $this->Model->find($id)->current();
+        $tlumaczenie = $this->Translate->getTranslate($this->Model->_module, $id, $lang);
+
+        // Laduj form
+
+        $array = array(
+            'form' => $this->Form,
+            'back' => '<div class="back"><a href="'.$this->view->baseUrl().'/admin/galeria/">Wróć do listy</a></div>',
+            'pagename' => ' - Edytuj tłumaczenie: '.$entry->nazwa
+        );
+        $this->view->assign($array);
+
+        if($tlumaczenie) {
+            $arrayForm = json_decode($tlumaczenie->json, true);
+            $this->Form->populate($arrayForm);
+        }
+
+        //Akcja po wcisnieciu Submita
+        if ($this->_request->getPost()) {
+
+            $formData = $this->_request->getPost();
+
+            //Sprawdzenie poprawnosci forma
+            if ($this->Form->isValid($formData)) {
+
+                $this->Translate->saveTranslate($formData, $this->Model->_module, $entry->id, $lang);
+                $this->redirect($this->redirect);
+
+            }
+        }
+    }
 }

@@ -25,32 +25,24 @@ class Model_ImageModel  extends Zend_Db_Table_Abstract
         }
     }
 
-    public function getImagesTranslated(int $id)
+    public function getImagesTranslated()
     {
         $translatedQuery = $this->_db_table->select()
             ->from(array('t' => 'tlumaczenie_wpisy'))
             ->join(array('tl' => $this->_name), 't.id_wpis = tl.id', array(
-                'link',
                 'plik'
             ))
             ->where('module = ?', $this->_module)
             ->where('lang = ?', $this->_locale)
-            ->where('id_place = ?', $id)
             ->order('sort ASC');
         return $this->_db_table->fetchAll($translatedQuery);
     }
-    /**
-     * Front - Pokaz wszystkie budynki dla inwestycji
-     * @param int $id
-     * @return Object
-     */
-    public function getImages(int $id)
+
+    public function getImages()
     {
         $images = $this->fetchAll(
             $this->select()
-                ->where('id_place = ?', $id)
                 ->order('sort ASC')
-
         );
         return $images;
     }

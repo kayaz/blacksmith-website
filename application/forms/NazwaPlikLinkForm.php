@@ -21,8 +21,8 @@ class Form_NazwaPlikLinkForm extends Zend_Form
                 array('Label'),
                 array(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'formRow'))));
 
-        $link = new Zend_Form_Element_Text('link');
-        $link->setLabel('Link URL')
+        $tekst = new Zend_Form_Element_Text('tekst');
+        $tekst->setLabel('Tekst')
             ->setRequired(false)
             ->setAttrib('size', 83)
             ->addValidator('NotEmpty')
@@ -61,7 +61,7 @@ class Form_NazwaPlikLinkForm extends Zend_Form
         $this->setDecorators(array('FormElements',array('HtmlTag'),'Form',));
         $this->addElements(array(
             $nazwa,
-            $link,
+            $tekst,
             $obrazek,
             $submit
         ));

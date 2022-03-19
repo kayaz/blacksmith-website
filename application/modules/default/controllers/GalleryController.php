@@ -5,9 +5,14 @@ class Default_GalleryController extends kCMS_Site
 
     private int $page_id;
     private $locale;
+    private $Model;
+    private $Translate;
 
     public function preDispatch() {
         $this->page_id = 2;
+        $this->Model = new Model_GalleryModel();
+        $this->Translate = new Model_TranslateModel();
+
         if($this->canbetranslate) {
             $this->locale = Zend_Registry::get('Zend_Locale')->getLanguage();
         } else {
@@ -27,12 +32,11 @@ class Default_GalleryController extends kCMS_Site
             $pageName = (isset($page->nazwa)) ? $page->nazwa : json_decode($page->json)->nazwa;
             $breadcrumbs = '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><b itemprop="item">'.$pageName .'</b><meta itemprop="position" content="2" /></li>';
 
-            $db = Zend_Registry::get('db');
-
-            $katalogQuery = $db->select()
-                ->from('galeria')
-                ->order('sort ASC');
-            $katalog = $db->fetchAll($katalogQuery);
+            if($this->locale == 'pl') {
+                $katalog = $this->Model->get();
+            } else {
+                $katalog = $this->Model->getTranslated();
+            }
 
             $array = array(
                 'pageclass' => ' gallery-page',
@@ -42,7 +46,6 @@ class Default_GalleryController extends kCMS_Site
                 'seo_tytul' => (isset($page->meta_tytul)) ? $page->meta_tytul : json_decode($page->json)->meta_tytul,
                 'seo_opis' => (isset($page->meta_opis)) ? $page->meta_opis : json_decode($page->json)->meta_opis,
                 'seo_slowa' => (isset($page->meta_slowa)) ? $page->meta_slowa : json_decode($page->json)->meta_slowa,
-                'content' => (isset($page->tekst)) ? $page->tekst : json_decode($page->json)->tekst,
                 'breadcrumbs' => $breadcrumbs,
                 'katalog' => $katalog,
                 'page' => $page
@@ -50,7 +53,6 @@ class Default_GalleryController extends kCMS_Site
             $this->view->assign($array);
         }
     }
-
 
     public function showAction() {
         $this->_helper->layout->setLayout('page');
@@ -64,14 +66,19 @@ class Default_GalleryController extends kCMS_Site
             $db = Zend_Registry::get('db');
             $slug = $this->getRequest()->getParam('slug');
 
-            $katalogQuery = $db->select()
-                ->from('galeria')
-                ->where('slug=?', $slug);
-            $katalog = $db->fetchRow($katalogQuery);
+            if($this->locale == 'pl') {
+                $katalog = $this->Model->fetchRow($this->Model->select()->where('slug =?', $slug));
+                $id_gallery = $katalog->id;
+            } else {
+                $katalog_pl = $this->Model->fetchRow($this->Model->select()->where('slug =?', $slug));
+                $id_gallery = $katalog_pl->id;
+
+                $katalog = $this->Translate->getTranslate('gallery', $katalog_pl->id, $this->locale);
+            }
 
             $photoQuery = $db->select()
                 ->from('galeria_zdjecia')
-                ->where('id_gal = ?', $katalog->id);
+                ->where('id_gal = ?', $id_gallery);
             $photos = $db->fetchAll($photoQuery);
 
             $pageName = (isset($page->nazwa)) ? $page->nazwa : json_decode($page->json)->nazwa;

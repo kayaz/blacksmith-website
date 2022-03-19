@@ -6,11 +6,11 @@
                     <h2><a href="<?=$this->url(array(
                             'language' => $this->lang,
                             'slug'=> $k->slug
-                        ), 'gallery-show');?>"><?=$k->nazwa;?></a></h2>
+                        ), 'gallery-show');?>"><?php echo (isset($k->nazwa)) ? $k->nazwa : json_decode($k->json)->nazwa;?></a></h2>
                     <a href="<?=$this->url(array(
                         'language' => $this->lang,
                         'slug'=> $k->slug
-                    ), 'gallery-show');?>" class="bttn justify-content-center">ZOBACZ GALERIĘ</a>
+                    ), 'gallery-show');?>" class="bttn justify-content-center"><?=$this->translate('tl_zobacz_galerie');?></a>
                 </div>
             </div>
             <div class="col-6">
@@ -18,7 +18,7 @@
                     'language' => $this->lang,
                     'slug'=> $k->slug
                 ), 'gallery-show');?>">
-                <img src="<?=$this->filesUrl(); ?>/galeria/catalog/<?=$k->plik;?>" alt="<?=$k->nazwa;?>">
+                <img src="<?=$this->filesUrl(); ?>/galeria/catalog/<?=$k->plik;?>" alt="<?php echo (isset($k->nazwa)) ? $k->nazwa : json_decode($k->json)->nazwa;?>">
                 </a>
             </div>
         </div>

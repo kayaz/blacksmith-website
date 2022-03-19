@@ -14,7 +14,7 @@ class Admin_AtutyController extends kCMS_Admin
         $this->Form = new Form_NazwaPlikLinkForm();
         $this->table = 'image';
         $back = '<div class="back"><a href="'.$this->view->baseUrl().'/admin/atuty/">Wróć do listy</a></div>';
-        $info = '<div class="info">Obrazek o wymiarach: szerokość <b>120</b>px / wysokość <b>120</b>px</div>';
+        $info = '<div class="info">Obrazek o wymiarach: szerokość <b>85</b>px / wysokość <b>85</b>px</div>';
         $this->redirect = 'admin/atuty';
         $array = array(
             'controlname' => "Partnerzy",
@@ -27,7 +27,7 @@ class Admin_AtutyController extends kCMS_Admin
 // Pokaz wszystkie
     public function indexAction() {
         $array = array(
-            'lista' => $this->Image->getImages(1)
+            'lista' => $this->Image->getImages()
         );
         $this->view->assign($array);
     }
@@ -39,7 +39,6 @@ class Admin_AtutyController extends kCMS_Admin
         $this->view->pagename = " - Dodaj obrazek";
 
         $this->view->form = $this->Form;
-        $this->Form->removeElement('link');
 
         //Akcja po wcisnieciu Submita
         if ($this->_request->getPost()) {
@@ -57,8 +56,6 @@ class Admin_AtutyController extends kCMS_Admin
 
             //Sprawdzenie poprawnosci forma
             if ($this->Form->isValid($formData)) {
-                $formData['id_place'] = 1;
-
                 $db->insert($this->table, $formData);
                 $lastId = $db->lastInsertId();
 
@@ -68,14 +65,14 @@ class Admin_AtutyController extends kCMS_Admin
                     chmod($upfile, 0755);
 
                     PhpThumbFactory::create($upfile)
-                        ->resize(120, 120)
+                        ->resize(85, 85)
                         ->save($upfile);
                     chmod($upfile, 0755);
 
                     $db->update($this->table, array('plik' => $plik), 'id = ' . $lastId);
                 }
 
-                $this->_redirect($this->redirect);
+                $this->redirect($this->redirect);
             } else {
                 //Wyswietl bledy
                 $this->view->message = '<div class="error">Formularz zawiera błędy</div>';
@@ -95,7 +92,6 @@ class Admin_AtutyController extends kCMS_Admin
         $this->view->pagename = " - Edytuj: ".$entry->nazwa;
 
         $this->view->form = $this->Form;
-        $this->Form->removeElement('link');
 
         // Załadowanie do forma
         $array = json_decode(json_encode($entry), true);
@@ -129,14 +125,14 @@ class Admin_AtutyController extends kCMS_Admin
                     chmod($upfile, 0755);
 
                     PhpThumbFactory::create($upfile)
-                        ->resize(120, 120)
+                        ->resize(85, 85)
                         ->save($upfile);
                     chmod($upfile, 0755);
 
                     $db->update($this->table, array('plik' => $plik), 'id = ' . $id);
                 }
 
-                $this->_redirect($this->redirect);
+                $this->redirect($this->redirect);
             } else {
 
                 //Wyswietl bledy
@@ -154,14 +150,13 @@ class Admin_AtutyController extends kCMS_Admin
         $id = (int)$this->getRequest()->getParam('id');
         $lang = $this->getRequest()->getParam('lang');
         if(!$id || !$lang){
-            $this->_redirect($this->redirect);
+            $this->redirect($this->redirect);
         }
         $entry = $this->Image->find($id)->current();
         $tlumaczenie = $this->Translate->getTranslate($this->Image->_module, $id, $lang);
 
         // Laduj form
         $this->Form->removeElement('obrazek');
-        $this->Form->removeElement('link');
 
         $array = array(
             'form' => $this->Form,
@@ -184,7 +179,7 @@ class Admin_AtutyController extends kCMS_Admin
             if ($this->Form->isValid($formData)) {
 
                 $this->Translate->saveTranslate($formData, $this->Image->_module, $entry->id, $lang);
-                $this->_redirect($this->redirect);
+                $this->redirect($this->redirect);
 
             }
         }
@@ -202,7 +197,7 @@ class Admin_AtutyController extends kCMS_Admin
         $where = $db->quoteInto('id = ?', $id);
         $db->delete($this->table, $where);
 
-        $this->_redirect($this->redirect);
+        $this->redirect($this->redirect);
     }
 
 // Ustaw kolejność

@@ -33,6 +33,8 @@ abstract class kCMS_Site extends Zend_Controller_Action {
                 $this->view->main_meta_tytul = $l->meta_tytul;
                 $this->view->main_meta_slowa = $l->meta_slowa;
                 $this->view->main_meta_opis = $l->meta_opis;
+                $this->view->homepage_about = $l->homepage_about;
+                $this->view->homepage_paralaxa = $l->homepage_paralaxa;
             }
         }
 
