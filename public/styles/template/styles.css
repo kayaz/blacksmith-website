@@ -320,6 +320,34 @@ header .mainmenu li:first-child:after {display: none}
 	background: var(--main-color);
 }
 
+.offer-gallery .gallery-thumbs {
+	padding: 0;
+}
+.offer-gallery .col-3-gallery {
+	-ms-flex: 0 0 33.333333%;
+	flex: 0 0 33.333333%;
+	max-width: 33.333333%;
+}
+.offer-gallery .col-gallery-thumb {
+	margin-top: 0;
+	margin-bottom: 30px;
+}
+
+.row .offer-gallery{
+	padding-left: 20px;
+}
+.row.flex-row-reverse .offer-gallery{
+	padding-right: 20px;
+}
+.offer-text h2 {
+	font-size: 42px;
+	margin-bottom: 25px;
+	color: #303030;
+	font-weight: 300;
+	text-transform: uppercase;
+	border-bottom: 1px solid #c58f59;
+	padding-bottom: 20px;
+}
 
 /* Homepage
 ================================================== */

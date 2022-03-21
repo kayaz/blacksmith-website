@@ -1,0 +1,23 @@
+<div class="container page-menu page-<?=$this->page->tag;?>">
+    <div class="row">
+        <div class="col-12 text-justify">
+            <?=(isset($this->page->tekst)) ? parse($this->page->tekst) : parse(json_decode($this->page->json)->tekst); ?>
+        </div>
+    </div>
+
+    <?php foreach($this->katalog as $int => $k) {?>
+        <div class="<?php echo fmod($int, 2) ? 'row mt-5 pb-5' : 'row flex-row-reverse mt-5 pb-5' ?>">
+            <div class="col-6">
+                <div class="offer-text">
+                    <h2><?php echo (isset($k->nazwa)) ? $k->nazwa : json_decode($k->json)->nazwa;?></h2>
+                    <?=(isset($k->tekst)) ? parse($k->tekst) : parse(json_decode($k->json)->tekst); ?>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="offer-gallery">
+                    <?=parse('[galeria=galeria]'.$k->galeria.'[/galeria]');?>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+</div>
