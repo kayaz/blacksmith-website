@@ -64,6 +64,29 @@ iframe {
 
 /* Social
 ================================================== */
+aside {position: fixed;top:260px;z-index: 1000;right:0}
+aside ul {list-style: none outside none;margin: 0;padding: 0;}
+aside ul li {text-indent: 0}
+aside ul li:before {display:none}
+aside a {color: #FFFFFF;display: block;font-size:21px;height:55px;line-height:56px;position: relative;text-align: center;width:55px}
+aside a:hover {color: #FFFFFF}
+aside a:before {font-family: "FontAwesome";font-style: normal;font-variant: normal;font-weight: normal;line-height: 1;text-align: center;text-transform: none;}
+
+.Facebook, .Facebook span {background:#234999}
+.Facebook:before {content:"\f09a"}
+.GPlus, .GPlus span {background:#e34429}
+.GPlus:before {content:"\f0d5"}
+.Youtube, .Youtube span {background:#cd181f}
+.Youtube:before {content:"\f16a"}
+.Twitter, .Twitter span {background:#00ABF0}
+.Twitter:before {content:"\f099"}
+.Phone, .Phone span {background:#f9b22f}
+.Phone:before {content:"\f095"}
+
+aside a span {right: -600%;font-size: 15px;height: inherit;line-height: 35px;margin-left: -5px;min-width: 110px;width: auto;}
+aside a span:before {right: -4px;}
+aside a span {width:0;-webkit-transition:opacity .3s, left .4s, right .4s, top .4s, bottom .4s;-moz-transition:opacity .3s, left .4s, right .4s, top .4s, bottom .4s;-ms-transition:opacity .3s, left .4s, right .4s, top .4s, bottom .4s;-o-transition:opacity .3s, left .4s, right .4s, top .4s, bottom .4s;transition:opacity .3s, left .4s, right .4s, top .4s, bottom .4s, width .4s;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);white-space:nowrap;opacity:0;position:absolute;z-index:-1;color:white;font-size:15px;line-height:56px}
+aside a:hover span {right:100%;opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";filter:alpha(opacity=1);margin-right:-5px;padding:0 13px 0 8px;-webkit-border-radius:5px 0 0 5px;-moz-border-radius:5px 0 0 5px;border-radius:5px 0 0 5px}
 
 
 /* Youtube

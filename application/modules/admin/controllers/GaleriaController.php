@@ -234,7 +234,7 @@ class Admin_GaleriaController extends kCMS_Admin
                     $wtrmrk_h = imagesy($watermark);
                     $dst_x = ($img_w / 2) - ($wtrmrk_w / 2); // For centering the watermark on any image
                     $dst_y = ($img_h / 2) - ($wtrmrk_h / 2); // For centering the watermark on any image
-                    imagecopy($img, $watermark, $dst_x, $dst_y, 0, 0, $wtrmrk_w, $wtrmrk_h);
+                    imagecopy($img, $watermark, 30, 30, 0, 0, $wtrmrk_w, $wtrmrk_h);
                     imagejpeg($img, $newcopy, 100);
                     imagedestroy($img);
                     imagedestroy($watermark);
