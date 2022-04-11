@@ -5,21 +5,16 @@ class kCMS_MenuBuilder {
     private $query;
     private $baseUrl;
     private $baseMenuUrl;
-    private $canbetranslate;
 
     function __construct() {
         $front = Zend_Controller_Front::getInstance();
         $request = $front->getRequest();
 
-		$this->canbetranslate = Zend_Registry::get('canbetranslate');
-		if($this->canbetranslate) {
-			$locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-		}
+        $locale = 'pl';
 
         $db = Zend_Registry::get('db');
         $db->setFetchMode(Zend_Db::FETCH_ASSOC);
-		
-		
+
 		if($locale == 'pl') {
 		
 			$select = $db->select()
@@ -65,17 +60,8 @@ class kCMS_MenuBuilder {
 		}
 		
         $this->query = $db->fetchAll($select);
-		
         $this->baseUrl = $request->getBaseUrl();
-
-        $this->canbetranslate = Zend_Registry::get('canbetranslate');
-        if($this->canbetranslate){
-            $locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-            ($locale == 'root') ? $lang = 'pl' : $lang = $locale;
-            $this->baseMenuUrl = $request->getBaseUrl().'/'.$lang;
-        } else {
-            $this->baseMenuUrl = $request->getBaseUrl();
-        }
+        $this->baseMenuUrl = $request->getBaseUrl();
     }
 
     function get_menu_items() {

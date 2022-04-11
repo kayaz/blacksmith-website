@@ -13,11 +13,7 @@ class Default_GalleryController extends kCMS_Site
         $this->Model = new Model_GalleryModel();
         $this->Translate = new Model_TranslateModel();
 
-        if($this->canbetranslate) {
-            $this->locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-        } else {
-            $this->locale = 'pl';
-        }
+        $this->locale = 'pl';
     }
 
     public function indexAction() {

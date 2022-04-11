@@ -16,7 +16,7 @@ abstract class kCMS_Site extends Zend_Controller_Action {
 
         $configApp = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'translated');
         if($configApp->app->translate) {
-            $locale = Zend_Registry::get('Zend_Locale')->getLanguage();
+            $locale = 'pl';
             $this->canbetranslate = 1;
             Zend_Registry::set('canbetranslate', 1);
         } else {

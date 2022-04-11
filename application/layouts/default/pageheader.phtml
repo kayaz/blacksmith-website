@@ -13,16 +13,13 @@
                     <ul class="breadcrumb justify-content-center" itemscope itemtype="https://schema.org/BreadcrumbList">
                         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <a itemprop="item" href="<?=$this->baseUrl;?>/">
-                                <span itemprop="name"><?=$this->translate('tl_strona_glowna');?></span>
+                                <span itemprop="name">Strona główna</span>
                             </a>
                             <meta itemprop="position" content="1" /></li>
                         <li class="sep"></li>
                         <?php
                         if($this->breadcrumbs) {
                             echo $this->breadcrumbs;
-                        } else {
-                            //$menu = Zend_Registry::get('mainmenu');
-                            //echo $menu->breadcrumbs($this->strona_id);
                         }
                         ?>
                     </ul>

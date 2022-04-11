@@ -3,16 +3,9 @@
 class Default_AboutController extends kCMS_Site
 {
     private $page_id;
-    private $locale;
 
     public function preDispatch() {
         $this->page_id = 3;
-
-        if($this->canbetranslate) {
-            $this->locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-        } else {
-            $this->locale = 'pl';
-        }
     }
 
     public function indexAction() {

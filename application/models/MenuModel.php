@@ -14,15 +14,7 @@ class Model_MenuModel  extends Zend_Db_Table_Abstract
             $this->_db_table->setFetchMode(Zend_Db::FETCH_OBJ);
         } catch (Zend_Exception $e) {
         }
-        try {
-            $this->canbetranslate = Zend_Registry::get('canbetranslate');
-            if($this->canbetranslate) {
-                $this->_locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-            } else {
-                $this->_locale = 'pl';
-            }
-        } catch (Zend_Exception $e) {
-        }
+        $this->_locale = 'pl';
     }
 
     /**

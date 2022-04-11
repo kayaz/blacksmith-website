@@ -13,16 +13,11 @@
 					<div class="col-9">
                         <nav class="navbar">
                             <ul class="mainmenu list-unstyled text-right mb-0">
-                                <li><a href="<?=$this->url(array('language'=> $this->lang), 'about');?>">O firmie</a></li>
-                                <li><a href="<?=$this->baseUrl();?>/<?=$this->lang;?>/oferta/">Oferta</a></li>
-                                <li><a href="<?=$this->url(array('language'=> $this->lang), 'gallery');?>">Galeria</a></li>
-                                <li><a href="<?=$this->url(array('language'=> $this->lang), 'contact');?>">Kontakt</a></li>
+                                <li><a href="<?=$this->url(array(), 'about');?>">O firmie</a></li>
+                                <li><a href="<?=$this->baseUrl();?>/oferta/">Oferta</a></li>
+                                <li><a href="<?=$this->url(array(), 'gallery');?>">Galeria</a></li>
+                                <li><a href="<?=$this->url(array(), 'contact');?>">Kontakt</a></li>
                                 <?php $this->menu->get_menu_html(); ?>
-                            </ul>
-                            <ul class="langmenu list-unstyled text-right mb-0">
-                                <?php foreach($this->langs as $l) { ?>
-                                    <li<?php if($this->lang == $l->kod){?> class="active"<?php } ?>><a href="<?php echo urldecode($this->switchLang($this->escape($l->kod)));?>" id="<?= $this->escape($l->kod);?>"><?= $l->kod;?></a></li>
-                                <?php } ?>
                             </ul>
                             <div id="headercta">
                                 <a href="tel:<?=$this->header->kontakt_telefon;?>">ZADZWOŃ DO NAS<br><strong><?=$this->header->kontakt_telefon;?></strong></a>

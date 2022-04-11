@@ -10,11 +10,7 @@ class Default_OfertaController extends kCMS_Site
         $this->page_id = 4;
         $this->Model = new Model_OfferModel();
 
-        if($this->canbetranslate) {
-            $this->locale = Zend_Registry::get('Zend_Locale')->getLanguage();
-        } else {
-            $this->locale = 'pl';
-        }
+        $this->locale = 'pl';
     }
 
     public function indexAction() {
